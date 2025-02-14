@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    public GameObject BulletPrefab;
     public float JumpForce;
     public float Speed;
 
@@ -21,6 +22,9 @@ public class NewBehaviourScript : MonoBehaviour
     {
        Horizontal = Input.GetAxisRaw("Horizontal");
 
+        if (Horizontal < 0.0f)transform.localScale= new Vector3 (-1.0f,1.0f,1.0f);
+        else if (Horizontal > 0.0f)transform.localScale = new Vector3(1.0f,1.0f,1.0f);
+
         Animator.SetBool("Running", Horizontal != 0.0f);
 
         Debug.DrawRay(transform.position,Vector3.down*0.1f,Color.red);
@@ -36,7 +40,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             Jump();
         }
-
+        if (Input.GetKeyDown(KeyCode.Space) && Grounded) ;
     }
     private void Jump()
     {
