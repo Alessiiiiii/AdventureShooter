@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class JohnMovement : MonoBehaviour
 {
     public GameObject BulletPrefab;
     public float JumpForce;
@@ -13,6 +13,7 @@ public class NewBehaviourScript : MonoBehaviour
     private float Horizontal;
     private bool Grid;
     private float LastShoot;
+    private int Health = 5;
 
 
     void Start()
@@ -67,5 +68,10 @@ public class NewBehaviourScript : MonoBehaviour
 
     {
         Rigidbody2D.velocity = new Vector2 (Horizontal,Rigidbody2D.velocity.y);
+    }
+    public void Hit()
+    {
+        Health = Health - 1;
+        if (Health == 0) Destroy(gameObject);
     }
 }

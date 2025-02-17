@@ -29,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5877094819699987904}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.764634, y: -4.199572, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.43868634, w: 0.8986402}
+  m_LocalPosition: {x: -2.75114, y: -4.21507, z: 0}
+  m_LocalScale: {x: 1.2862811, y: 1.3109485, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -52.04}
 --- !u!212 &3800636746965859902
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -117,12 +117,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0051869154, y: 0.006224461}
   serializedVersion: 2
-  m_Radius: 0.04
+  m_Radius: 0.035331607
 --- !u!50 &5413441605118295265
 Rigidbody2D:
   serializedVersion: 4
@@ -162,7 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b930f40723e1143a7528f4bea53ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1
+  Sound: {fileID: 8300000, guid: 2b994d7305c6dc6458c934db982e4bee, type: 3}
+  Speed: 2
 --- !u!95 &469468192249943184
 Animator:
   serializedVersion: 5
