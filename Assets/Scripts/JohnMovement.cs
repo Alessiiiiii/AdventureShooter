@@ -15,7 +15,6 @@ public class JohnMovement : MonoBehaviour
     private float LastShoot;
     private int Health = 5;
 
-
     void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -24,54 +23,78 @@ public class JohnMovement : MonoBehaviour
 
     void Update()
     {
-       Horizontal = Input.GetAxisRaw("Horizontal");
+        Horizontal = Input.GetAxisRaw("Horizontal");
+        Debug.Log("Horizontal input: " + Horizontal);
 
-        if (Horizontal < 0.0f)transform.localScale= new Vector3 (-1.0f,1.0f,1.0f);
-        else if (Horizontal > 0.0f)transform.localScale = new Vector3(1.0f,1.0f,1.0f);
+        if (Horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        else if (Horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
         Animator.SetBool("Running", Horizontal != 0.0f);
+        Debug.Log("Running: " + (Horizontal != 0.0f));
 
-        Debug.DrawRay(transform.position,Vector3.down*0.1f,Color.red);
+        Debug.DrawRay(transform.position, Vector3.down * 0.1f, Color.red);
 
-        if (Physics2D.Raycast(transform.position,Vector3.down,0.1f))
-
+        if (Physics2D.Raycast(transform.position, Vector3.down, 0.1f))
         {
             Grid = true;
+            Debug.Log("John está en el suelo.");
         }
-        else Grid = false;
+        else
+        {
+            Grid = false;
+            Debug.Log("John no está en el suelo.");
+        }
 
         if (Input.GetKeyDown(KeyCode.W) && Grid)
         {
             Jump();
         }
-        if (Input.GetKey(KeyCode.Space)&&Time.time>LastShoot+0.25f)
+        if (Input.GetKey(KeyCode.Space) && Time.time > LastShoot + 0.25f)
         {
             Shoot();
             LastShoot = Time.time;
         }
     }
+
     private void Jump()
     {
-        Rigidbody2D.AddForce(Vector2.up*JumpForce);
+        Debug.Log("John salta.");
+        Rigidbody2D.AddForce(Vector2.up * JumpForce);
     }
+
     private void Shoot()
     {
+        if (BulletPrefab == null)
+        {
+            Debug.LogError("BulletPrefab es nulo, no se puede instanciar.");
+            return;
+        }
+
         Vector3 direction;
         if (transform.localScale.x == 1.0f) direction = Vector3.right;
-        else direction=Vector3.left;
+        else direction = Vector3.left;
 
-       GameObject bullet= Instantiate(BulletPrefab, transform.position+direction*0.1f, Quaternion.identity);
-        bullet.GetComponent<BulletJohn>().SetDirection(direction);
+        GameObject BulletInstance = Instantiate(BulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
+        if (BulletInstance != null)
+        {
+            BulletInstance.GetComponent<BulletJohn>().SetDirection(direction);
+            Debug.Log("Bala instanciada correctamente.");
+        }
+        else
+        {
+            Debug.LogError("BulletInstance es nulo después de instanciar.");
+        }
     }
 
     private void FixedUpdate()
-
     {
-        Rigidbody2D.velocity = new Vector2 (Horizontal,Rigidbody2D.velocity.y);
+        Debug.Log("Velocidad de John: " + Rigidbody2D.velocity);
+        Rigidbody2D.velocity = new Vector2(Horizontal * Speed, Rigidbody2D.velocity.y);
     }
+
     public void Hit()
     {
-        Health = Health - 1;
+        Health -= 1;
         if (Health == 0) Destroy(gameObject);
     }
 }
