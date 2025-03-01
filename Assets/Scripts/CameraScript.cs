@@ -7,7 +7,7 @@ public class CameraScript : MonoBehaviour
     public GameObject John;
     void Update()
     {
-        if (John != null)
+        if (John!=null)
         {
 
             Vector3 position = transform.position;

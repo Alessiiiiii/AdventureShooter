@@ -11,6 +11,7 @@ public class GruntScript : MonoBehaviour
     public GameObject BulletPrefab;
     private int Health = 3;
 
+
         
 
         private void Update()
@@ -35,7 +36,7 @@ public class GruntScript : MonoBehaviour
         {
             if (BulletPrefab == null)
             {
-                Debug.LogError("BulletPrefab es nulo, no se puede instanciar.");
+                Debug.LogError("BulletPrefap es nulo, no se puede instanciar.");
                 return;
             }
 
@@ -46,7 +47,7 @@ public class GruntScript : MonoBehaviour
             GameObject BulletPrefap = Instantiate(BulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
             if (BulletPrefap != null)
             {
-                BulletPrefap.GetComponent<BulletJohn>().SetDirection(direction);
+                BulletPrefap.GetComponent<BulletPrefap>().SetDirection(direction);
             }
             else
             {

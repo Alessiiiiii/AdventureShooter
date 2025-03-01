@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class JohnMovement : MonoBehaviour
 {
-    public GameObject BulletPrefab;
+    public GameObject BulletPrefap;
+    
     public float JumpForce;
     public float Speed;
 
@@ -64,7 +65,7 @@ public class JohnMovement : MonoBehaviour
 
     private void Shoot()
     {
-        if (BulletPrefab == null)
+        if (BulletPrefap == null)
         {
             Debug.LogError("BulletPrefab es nulo, no se puede instanciar.");
             return;
@@ -74,14 +75,25 @@ public class JohnMovement : MonoBehaviour
         if (transform.localScale.x == 1.0f) direction = Vector3.right;
         else direction = Vector3.left;
 
-        GameObject BulletInstance = Instantiate(BulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
+        GameObject BulletInstance = Instantiate(BulletPrefap, transform.position+direction*0.1f, Quaternion.identity);
+
         if (BulletInstance != null)
+
         {
-            BulletInstance.GetComponent<BulletJohn>().SetDirection(direction);
-            Debug.Log("Bala instanciada correctamente.");
+            BulletInstance.GetComponent<BulletPrefap>().SetDirection(direction);
+
+
+
+            Debug.Log("Bala instanciada correctamente con dirección y velocidad.");
+
         }
+        
         else
-        {
+        {       
+                 
+              
+       
+        
             Debug.LogError("BulletInstance es nulo después de instanciar.");
         }
     }
@@ -94,7 +106,7 @@ public class JohnMovement : MonoBehaviour
 
     public void Hit()
     {
-        Health -= 1;
+        Health=Health -= 1;
         if (Health == 0) Destroy(gameObject);
     }
 }
